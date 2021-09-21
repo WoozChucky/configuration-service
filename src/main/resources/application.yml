@@ -1,0 +1,60 @@
+server:
+  port: 8888
+  compression:
+    enabled: true
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+  http2:
+    enabled: true
+
+
+spring:
+  application:
+    name: configuration-service
+  profiles:
+    active: default
+  mandatory-file-encoding: UTF-8
+  cloud:
+    config:
+      server:
+        health:
+          enabled: false
+        monitor:
+            github:
+                enabled: true
+        git:
+          uri: https://github.com/nunolevezinho/insomnia2-configs.git
+          clone-on-start: false
+          clone-submodules: false
+          skip-ssl-validation: false
+          default-label: main
+        default-profile: default
+    bus:
+      enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true
+
+encrypt:
+  key: my-secret-key
